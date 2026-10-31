@@ -1,0 +1,18 @@
+[project]
+name = "lsci220"
+version = "2026.1"
+description = "LSCI 220: Introduction to Computational Linguistics and NLP (course notebooks)"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "marimo",
+    "nltk",
+    "matplotlib",
+    "polars",
+    "requests",
+]
+
+[tool.uv]
+package = false
+
+[tool.marimo.runtime]
+auto_instantiate = true
