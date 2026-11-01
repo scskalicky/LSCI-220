@@ -27,7 +27,7 @@ def _(mo):
     mo.md(r"""
     # Get your feet wet and start using some Python.
 
-    Python has a reputation among some people for being "easy" because the code almost looks like you can just type what you want. An older [XKCD](https://xkcd.com/) comic tried to make this point (although it was when Python 2.x was being used!). You might not immediately get parts of this comic, but come back later in the course and you might find it more meaningful :)
+    Python has a reputation among some people for being "easy" because the code almost looks like you can just type what you want. An older [XKCD](https://xkcd.com/) comic tried to make this point (although it was when Python 2.x was being used!). You might not immediately get parts of this comic, but come back later in the course and you might!
 
     > <img src = "https://imgs.xkcd.com/comics/python.png" height = 500>
 
@@ -191,7 +191,6 @@ def _(mo):
 @app.cell
 def _():
     # use this code cell to create your variable and print it!
-
 
     return
 
@@ -433,7 +432,6 @@ def _(mo):
 @app.cell
 def _():
     # use this code cell to test things out!
-
 
     return
 
