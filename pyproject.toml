@@ -15,4 +15,4 @@ dependencies = [
 package = false
 
 [tool.marimo.runtime]
-auto_instantiate = true
+auto_instantiate = false

@@ -29,7 +29,7 @@ def _(mo):
 
     This notebook checks that everything you need for LSCI 220 is working on your computer.
 
-    Scroll to the bottom. A green **"All checks passed"** box means you're set up.
+    Click the ▶ **Run all stale cells** button to run the notebook. Then scroll to the bottom. A green **"All checks passed"** box means you're set up.
     """)
     return
 
