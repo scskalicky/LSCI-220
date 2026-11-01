@@ -690,7 +690,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # One text, several pipelines
+    # One text but many pipelines
 
     Every choice we've made in this notebook changes the tokens we end up with, and so changes anything we count with those tokens. Let's see how much.
 
