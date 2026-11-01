@@ -583,7 +583,7 @@ def _():
     import requests
 
     # load the script from the internet as one long string
-    mb_url = 'https://raw.githubusercontent.com/scskalicky/LING-226-vuw/main/sample-texts/marine_biologist.txt'
+    mb_url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/sample-texts/marine_biologist.txt'
     mb_raw = requests.get(mb_url).text
 
     # lowercase the text and split it into tokens
@@ -592,6 +592,13 @@ def _():
     # how many tokens are in the script?
     len(mb_tokens)
     return (mb_tokens,)
+
+
+@app.cell
+def _(mb_tokens):
+    # look at the first bit of the text
+    print(mb_tokens[:10])
+    return
 
 
 @app.cell(hide_code=True)
@@ -657,8 +664,15 @@ def segmental_ttr(tokens, chunk_size):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    The cell below compares plain TTR and MSTTR (with chunks of 50 tokens) for the same sample chosen with the slider above. Go back and move the slider again. Which measure changes more as the text gets longer?
+    The cells below show the slider again and compare plain TTR and MSTTR (with chunks of 50 tokens) for the same sample. Move the slider. Which measure changes more as the text gets longer?
     """)
+    return
+
+
+@app.cell
+def _(length_slider):
+    # the same slider as above - here for convenience
+    length_slider
     return
 
 
