@@ -583,7 +583,7 @@ def _():
     import requests
 
     # load the script from the internet as one long string
-    mb_url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/sample-texts/marine_biologist.txt'
+    mb_url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/resources/marine_biologist.txt'
     mb_raw = requests.get(mb_url).text
 
     # lowercase the text and split it into tokens

@@ -71,7 +71,7 @@ def _():
 def _():
     # read a text from the course GitHub repository
     import requests
-    url = 'https://raw.githubusercontent.com/scskalicky/LING-226-vuw/main/sample-texts/tmoom.txt'
+    url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/resources/tmoom.txt'
     meat = requests.get(url).text
     print(meat[:200])
     return (meat,)

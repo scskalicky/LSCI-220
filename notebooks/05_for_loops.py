@@ -231,7 +231,7 @@ def _():
     import requests
 
     # save url to a variable
-    url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/sample-texts/grasshopper.txt'
+    url = 'https://raw.githubusercontent.com/scskalicky/LSCI-220/main/resources/grasshopper.txt'
 
     # get the text at that url as a string
     grasshopper = requests.get(url).text
