@@ -280,6 +280,7 @@ def _(mo):
     2. loops through the results of using `.split()` on grasshopper (which is a list of each word)
     3. checks whether a word is over five characters long
     4. If the word is over five characters long, it is added to `output` using the `.append()` list method.
+    5. Note that I use `w` here because of marimo (`word` was used in a cell earlier)
     """)
     return
 
@@ -290,10 +291,10 @@ def _(grasshopper):
     output = []
 
     # loop over every string in the list
-    for word2 in grasshopper.split():
-      if len(word2) > 5:
+    for w in grasshopper.split():
+      if len(w) > 5:
         # each time a word2 in grasshopper meets this condition, it is added to output
-        output.append(word2)
+        output.append(w)
 
     # show the output - a list of words over 5 characters long.
     print(output)
@@ -311,11 +312,11 @@ def _(mo):
 
     1. first I define the function using `def` and name it `long_words`
     2. the function takes one argument, `text` - this is an arbitrary name like any variable name
-    3. On line 2 I create an empty list named `output`
-    4. Line 3 defines a `for loop` over the words from `.split()`. Note that the variable `text` will stand for whatever input we give the function
-    5. Line 4 has the conditional test
-    6. Line 5 adds the word to the list if it passes the test (i.e., the condition returns `True`)
-    7. Line 6 is a `return` statement which only executes once the `for` loop is complete.
+    3. On line 3 I create an empty list named `output`
+    4. Line 4 defines a `for loop` over the words from `.split()`. Note that the variable `text` will stand for whatever input we give the function
+    5. Line 5 has the conditional test
+    6. Line 6 adds the word to the list if it passes the test (i.e., the condition returns `True`)
+    7. Line 7 is a `return` statement which only executes once the `for` loop is complete.
 
     The `return` statement means we can save the *results* of this function to a new variable, or watch the results be sent to the console.
 
@@ -431,6 +432,20 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### Reusing variable names in list comprehensions
+
+    You may have noticed that these list comprehensions keep using `letter`, even though `letter` was already used in a `for` loop near the top of this notebook. Why doesn't marimo complain?
+
+    In marimo, each variable can only be created in one cell. The variable in a `for` loop (like `letter` in `for letter in 'word':`) is a normal variable: it still exists after the loop has finished, so marimo counts it as being created by that cell. That's why each `for` loop in this notebook uses a different name.
+
+    The variable inside a list comprehension is different. It only exists inside the square brackets, and it disappears once the list has been made. Because it never becomes a normal variable, marimo doesn't count it, so you can reuse names like `letter` or `w` in as many list comprehensions as you like. This is an additional benefit of list comprehensions within what could be considered a strength or weakness of marimo.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## Performing operations in a list comprehension
 
     The expression on the left side of the list comprehension (before the `for`) is the place where we can perform operations on the values we are looping across. So, instead of just returning the value, we could do things like measure their length, convert to uppercase, or any other number of functions.
@@ -522,9 +537,9 @@ def _(mo):
 
     ```
     output = []
-    for word2 in grasshopper.split():
-      if len(word2) > 5:
-        output.append(word2)
+    for w in grasshopper.split():
+      if len(w2) > 5:
+        output.append(w)
     ```
 
     Now see how the list comprehension does the same thing in a more compact manner:
