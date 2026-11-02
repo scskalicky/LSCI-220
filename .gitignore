@@ -184,3 +184,10 @@ __marimo__/
 
 # macOS
 .DS_Store
+
+# corpora downloaded by the notebooks
+seinfeld/
+amazon reviews/
+corpus/
+categories.txt
+!resources/categories.txt
