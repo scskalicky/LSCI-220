@@ -191,3 +191,12 @@ amazon reviews/
 corpus/
 categories.txt
 !resources/categories.txt
+
+# files written by the writing data to file notebook
+text.txt
+JERRY.txt
+KRAMER.txt
+GEORGE.txt
+woodchuckFreq.txt
+withtext.txt
+textAnalytics.csv

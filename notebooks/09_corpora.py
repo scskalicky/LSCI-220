@@ -364,7 +364,7 @@ def _(mo):
     2. the folder the files are in (the `root`), and
     3. the names of the files.
 
-    Let's start with some data! The scripts of several episodes of the American television show *Seinfeld* are stored online as a single zip file. The function below downloads a zip file and unzips it into a folder. The folder will appear in your course folder (or in the files panel, if you are using molab).
+    Let's start with some data! The scripts of several episodes of the American television show *Seinfeld* are stored online as a single zip file. The function below downloads a zip file and unzips it into a folder. The folder will appear in the folder that contains this notebook (you can also see it with the **files** button in marimo's left sidebar).
 
     (You don't need to understand every line of this function. `io.BytesIO()` lets Python treat the downloaded data as if it were a file, so that `zipfile` can unzip it.)
     """)
@@ -570,7 +570,7 @@ def _(mo):
     mo.md(r"""
     ### Using your own files
 
-    To make a corpus from your own texts, put your `.txt` files in a folder in your course folder (or upload them to molab), and point `PlaintextCorpusReader` at that folder with `root`.
+    To make a corpus from your own texts, put your `.txt` files in a folder inside the folder that contains this notebook (you can add files with the **files** button in marimo's left sidebar), and point `PlaintextCorpusReader` at that folder with `root`.
 
     For security reasons, NLTK will only read corpus files from folders it has been told it can use. The line `nltk.data.path.append('.')` at the top of this notebook allows the current folder (and any folders inside it). If your corpus is somewhere else on your computer, add that folder too, e.g. `nltk.data.path.append('/path/to/my/corpus')`.
     """)
