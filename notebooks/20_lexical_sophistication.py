@@ -672,14 +672,14 @@ def _(calculate_metric3, lexical_dictionaries, pl, texts):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    That's a bit hard to read. We can use `.pivot()` to put the lexicons in the columns, so each text has one row:
+    That's a bit hard to read. We can use `.pivot()` to put the texts in the columns, so each lexicon has one row:
     """)
     return
 
 
 @app.cell
 def _(profiles):
-    profiles.pivot(on = 'lexicon', index = 'text', values = 'average')
+    profiles.pivot(on = 'text', index = 'lexicon', values = 'average')
     return
 
 
@@ -697,7 +697,7 @@ def _(mo):
 
 @app.cell
 def _(profiles):
-    profiles.pivot(on = 'lexicon', index = 'text', values = 'coverage')
+    profiles.pivot(on = 'text', index = 'lexicon', values = 'coverage')
     return
 
 
