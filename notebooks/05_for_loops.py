@@ -186,7 +186,7 @@ def _(mo):
     mo.md(r"""
     ## Looping to check properties of words
 
-    In a previous notebook I asked two questions about words/language you might want to answer:
+    In the conditionals notebook I asked two questions about words/language you might want to answer:
 
     - what if you wanted to find all of the uppercase letters in the string `"Victoria University of Wellington"`?
 
@@ -214,7 +214,7 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    I'm going to read in a text from the internet in the next cell to demonstrate a longer text. It's okay if you don't get what's going on, and we'll dig into this later.
+    I'm going to read in a text from the internet in the next cell to demonstrate a longer text. It's okay if you don't get what's going on, and we'll dig into this elsewhere.
 
     - I'm loading in a library called `requests`, which allows us to read data from URLs
     - I'm then saving a URL of my choice as a string to the variable `url` (I already know this text is stored at this URL).

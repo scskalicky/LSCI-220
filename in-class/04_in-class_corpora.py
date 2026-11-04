@@ -252,7 +252,7 @@ def _(mo):
     mo.md(r"""
     Does this match my hypothesis? Anything else you think should be / could be done?
 
-    (Counting how often *every* word appears in a text is exactly what `nltk.FreqDist()` does, which we will use next session.)
+    (Counting how often *every* word appears in a text is exactly what `nltk.FreqDist()` does, which you will learn about in the frequency notebook.)
     """)
     return
 
@@ -340,7 +340,7 @@ def _(mo):
     mo.md(r"""
     # **Activity: concordance lines**
 
-    Counting tells us *how often* a word is used, but not how it is *used*. A **concordance** shows every place a word occurs, with the words around it. (We'll look at concordances properly in week 3.)
+    Counting tells us *how often* a word is used, but not how it is *used*. A **concordance** shows every place a word occurs, with the words around it. (You looked at concordances in more depth in the concordances notebook.)
 
     To get concordance lines, we wrap the words of a speech in NLTK's `Text()`. Choose a word and a speech below.
     """)
@@ -379,7 +379,7 @@ def _(mo):
 
     (if time...)
 
-    To make your own corpus, you need your own `.txt` files in a folder. The cell below makes three short "texts" and saves them as files in a folder called `mini_corpus` (you'll learn how writing files works in a later notebook - normally you would already have your `.txt` files).
+    To make your own corpus, you need your own `.txt` files in a folder. The cell below makes three short "texts" and saves them as files in a folder called `mini_corpus` (you'll learn how writing files works in the writing data to file notebook - normally you would already have your `.txt` files).
     """)
     return
 

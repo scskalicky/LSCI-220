@@ -123,7 +123,7 @@ def _(quote):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    If you wanted to know how long the combined string is within `quote`, you could do a variety of different things. Here is just one of many possibilities, using the string method `.join()`. We will learn more about this later - this here is just for a bit of extra info.
+    If you wanted to know how long the combined string is within `quote`, you could do a variety of different things. Here is just one of many possibilities, using the string method `.join()`. We will learn more about this elsewhere - this here is just for a bit of extra info.
     """)
     return
 

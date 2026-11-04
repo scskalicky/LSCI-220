@@ -97,7 +97,7 @@ def _(mo):
         increase count of word + 1
     ```
 
-    Now, what kind of data container would make sense for this? A `list` might be able to work, but this would require some careful indexing and might become a pain. There is another data container better designed for this known as a `dictionary`, which you will learn about in the next notebook. For now, we can rely on a built-in NLTK function named `FreqDist()`, which creates a dictionary of `value:frequency` pairs.
+    Now, what kind of data container would make sense for this? A `list` might be able to work, but this would require some careful indexing and might become a pain. There is another data container better designed for this known as a `dictionary`, which you will learn about in the dictionaries notebook. For now, we can rely on a built-in NLTK function named `FreqDist()`, which creates a dictionary of `value:frequency` pairs.
     """)
     return
 
@@ -915,7 +915,7 @@ def _(mo):
     mo.md(r"""
     So what could we do if we wanted to create a frequency distribution of the words for each of the categories in the Brown corpus? We could manually save a FreqDist for each category, but that would be a lot of typing.
 
-    Instead, let's loop through the categories and store the results in a dictionary (you'll learn more about dictionaries in a later notebook). In the cell below, do you see how the names of the categories are used to loop through the Brown corpus but also create the name of each key in the dictionary?
+    Instead, let's loop through the categories and store the results in a dictionary (you'll learn more about dictionaries in the dictionaries notebook). In the cell below, do you see how the names of the categories are used to loop through the Brown corpus but also create the name of each key in the dictionary?
     """)
     return
 

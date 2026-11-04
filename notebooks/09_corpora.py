@@ -261,7 +261,7 @@ def _(brown):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    The different genres or categories in Brown allow for a means to compare different writing styles. In the next session (frequency), we will use these categories to compare how often different words occur in different genres.
+    The different genres or categories in Brown allow for a means to compare different writing styles. In the frequency notebook, we will use these categories to compare how often different words occur in different genres.
 
     ## **Your Turn**
 
@@ -461,7 +461,7 @@ def _(marine_biologist_corpus):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    NLTK also has a function called `.concordance()`, which shows every place a word occurs along with the words around it. To use it on our own corpus, we need to wrap the tokenized words in an NLTK function called `Text()`. (We will look at concordances properly in week 3.)
+    NLTK also has a function called `.concordance()`, which shows every place a word occurs along with the words around it. To use it on our own corpus, we need to wrap the tokenized words in an NLTK function called `Text()`. (We will look at concordances in more depth in the concordances notebook.)
     """)
     return
 
@@ -554,7 +554,7 @@ def _(seinfeld_corpus):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Here is a sneak peek of the next session: `nltk.FreqDist()` counts how often each word occurs, and `.most_common()` shows the most frequent ones. What are the ten most common words in our corpus?
+    Here is a sneak peek of the frequency notebook: `nltk.FreqDist()` counts how often each word occurs, and `.most_common()` shows the most frequent ones. What are the ten most common words in our corpus?
     """)
     return
 
@@ -738,7 +738,7 @@ def _(download_corpus):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    You will also need your file which maps the categories. The cell below downloads one and saves it as `categories.txt` inside the `corpus` folder (you'll learn how writing files works in a later notebook). NLTK will only read a categories file from inside the corpus folder, so that's where it needs to go.
+    You will also need your file which maps the categories. The cell below downloads one and saves it as `categories.txt` inside the `corpus` folder (you'll learn how writing files works in the writing data to file notebook). NLTK will only read a categories file from inside the corpus folder, so that's where it needs to go.
     """)
     return
 

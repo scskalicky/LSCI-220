@@ -248,7 +248,7 @@ def _(mo):
 
     The function will `return` (i.e., give back) the number of unique tokens (`len(set(tokens))`) divided by the number of tokens (`len(tokens)`).
 
-    Creating functions will be covered in more detail later on.
+    Creating functions will be covered in more detail in the writing functions notebook.
     """)
     return
 
@@ -500,7 +500,7 @@ def _(rwib):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Now that we have figured out a way to split a string into sentences, we can build our average TTR function. I am going to include a `for loop` inside this function. We will cover these in more detail later on, but you might be able to understand the logic of it now. Basically, a `for loop` will repeat the same operation on each member of a specified population.
+    Now that we have figured out a way to split a string into sentences, we can build our average TTR function. I am going to include a `for loop` inside this function. We will cover these in more detail in the for loops notebook, but you might be able to understand the logic of it now. Basically, a `for loop` will repeat the same operation on each member of a specified population.
 
     If you want to explore the function as it works, you can uncomment the print statements.
 
