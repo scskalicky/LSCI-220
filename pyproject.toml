@@ -9,6 +9,7 @@ dependencies = [
     "matplotlib",
     "polars",
     "requests",
+    "scikit-learn",
 ]
 
 [tool.uv]
