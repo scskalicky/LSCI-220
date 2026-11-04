@@ -26,16 +26,6 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    #### Other tutorials on this topic
-
-    [scikit-learn: Latent Dirichlet Allocation](https://scikit-learn.org/stable/modules/decomposition.html#latentdirichletallocation)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
     # **Topic modelling: finding groups of words across documents**
 
     In the tf-idf notebook, we found the words that make *one* document distinctive when compared to all the other documents in a corpus. Topic modelling turns this around a bit. Instead of looking at what makes one document different, a topic model looks for groups of words which tend to occur *together* across lots of different documents.
@@ -220,7 +210,6 @@ def _(brown_lda, top_topic_words):
         brown_topic_words[topic_number] = top_topic_words(topic_scores)
         # print them here for easy inspection
         print(topic_number, brown_topic_words[topic_number])
-
     return (brown_topic_words,)
 
 
