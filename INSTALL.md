@@ -54,6 +54,16 @@
 
 4. Your notebook is saved in the `lsci220` folder and appears on the home page next time.
 
+## Tips for using marimo
+
+### Indentation errors
+
+Python uses indentation (spaces at the start of a line) to group code inside loops, `if` statements and functions. Every line in the same group must be indented by exactly the same amount.
+
+The code in the course notebooks is indented with 2 spaces, but pressing **Tab** in marimo adds 4 spaces. If you add a line to existing code with Tab, you can get an `IndentationError`, even though the code looks fine.
+
+To fix this, format the cell: click the **`...`** button at the top right of the cell and choose **Format cell** (or press **Cmd + B** on Mac, **Ctrl + B** on Windows). marimo will tidy up the cell so that all of the indentation is consistent.
+
 ## Backing up your work
 
 1. Your notebooks are the `.py` files in the `lsci220` folder. Back them up regularly, for example by copying them to a USB drive or to your cloud storage.

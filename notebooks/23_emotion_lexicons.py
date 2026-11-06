@@ -175,29 +175,31 @@ def _(nrc_emotion_dict):
 
 @app.cell
 def _(nltk, nrc_all_words):
-    def profile_emotions(text, dictionary):
-      '''
-      analyse emotional content of a text based on an emotion dictionary,
-      and calculate the coverage of emotion-related words.
+    def profile_emotions(text, dictionary, show_vocab=False):
+        """
+        analyse emotional content of a text based on an emotion dictionary,
+        and calculate the coverage of emotion-related words.
 
-      Returns:
-        output (dict): each emotion and the proportion of tokens associated with that emotion
-        coverage (float): the proportion of tokens which are in the emotion dictionary
-      '''
-      # lowercase and tokenize text, keeping only alphabetic tokens
-      tokens = [token for token in nltk.word_tokenize(text.lower()) if token.isalpha()]
+        Returns:
+          output (dict): each emotion and the proportion of tokens associated with that emotion
+          coverage (float): the proportion of tokens which are in the emotion dictionary
+        """
+        # lowercase and tokenize text, keeping only alphabetic tokens
+        tokens = [token for token in nltk.word_tokenize(text.lower()) if token.isalpha()]
 
-      # calculate the proportion of tokens in each emotion category
-      output = {}
-      for emotion in dictionary:
-        emotion_tokens = [token for token in tokens if token in dictionary[emotion]]
-        output[emotion] = round(len(emotion_tokens) / len(tokens), 2)
+        # calculate the proportion of tokens in each emotion category
+        output = {}
+        for emotion in dictionary:
+            emotion_tokens = [token for token in tokens if token in dictionary[emotion]]
+            output[emotion] = round(len(emotion_tokens) / len(tokens), 2)
 
-      # calculate coverage (how many words are actually in the dictionary)
-      in_vocab = [token for token in tokens if token in nrc_all_words]
-      coverage = round(len(in_vocab) / len(tokens), 2)
+        # calculate coverage (how many words are actually in the dictionary)
+        in_vocab = [token for token in tokens if token in nrc_all_words]
+        coverage = round(len(in_vocab) / len(tokens), 2)
 
-      return output, coverage, in_vocab
+        if show_vocab == True:
+            return output, coverage, in_vocab
+        return output, coverage
 
     return (profile_emotions,)
 
@@ -212,7 +214,7 @@ def _(mo):
 
 @app.cell
 def _(nrc_emotion_dict, profile_emotions):
-    profile_emotions('these pretzels are making me thirsty', nrc_emotion_dict)
+    profile_emotions('these pretzels are making me thirsty', nrc_emotion_dict, show_vocab = True)
     return
 
 
@@ -226,7 +228,7 @@ def _(mo):
 
 @app.cell
 def _(nrc_emotion_dict, profile_emotions):
-    profile_emotions('love hate hurt heal', nrc_emotion_dict)
+    profile_emotions('love hate hurt heal', nrc_emotion_dict, show_vocab = True)
     return
 
 
@@ -274,7 +276,7 @@ def _(raw_vad):
     vad_dict = {}
 
     for line in raw_vad[1:]:
-      vad_parts = line.strip().split('\t') # .strip() removes a trailing '\r' in the data
+      vad_parts = line.strip().split('\t') # .strip() removes any trailing spaces/newlines
       # only keep complete rows
       if len(vad_parts) == 4:
         vad_word, valence, arousal, dominance = vad_parts
@@ -353,7 +355,7 @@ def _(mo):
     mo.md(r"""
     # **Comparing texts**
 
-    Let's try out these functions on multiple texts - comparing a *Seinfeld* episode against a Lorde song:
+    Let's try out these functions on multiple texts - comparing a *Seinfeld* episode, a Lorde song, and They're made out of meat
     """)
     return
 
@@ -362,9 +364,10 @@ def _(mo):
 def _(requests):
     mb = requests.get('https://raw.githubusercontent.com/scskalicky/LSCI-220/main/resources/marine_biologist.txt').text
     mr = requests.get('https://raw.githubusercontent.com/scskalicky/LSCI-220/main/resources/mood_ring.txt').text
+    meat = requests.get('https://raw.githubusercontent.com/scskalicky/LSCI-220/refs/heads/main/resources/tmoom.txt').text
 
-    texts = {'Marine Biologist': mb, 'Mood Ring': mr}
-    return mb, mr, texts
+    texts = {'Marine Biologist': mb, 'Mood Ring': mr, 'tmoom' : meat}
+    return mb, meat, mr, texts
 
 
 @app.cell(hide_code=True)
@@ -396,17 +399,19 @@ def _(mo):
 
 
 @app.cell
-def _(mb, mr, nrc_emotion_dict, pl, profile_emotions):
-    mb_emotions, mb_coverage = profile_emotions(mb, nrc_emotion_dict)
-    mr_emotions, mr_coverage = profile_emotions(mr, nrc_emotion_dict)
+def _(mb, meat, mr, nrc_emotion_dict, pl, profile_emotions):
+    mb_emotions, mb_coverage, mb_words = profile_emotions(mb, nrc_emotion_dict, show_vocab=True)
+    mr_emotions, mr_coverage, mr_words = profile_emotions(mr, nrc_emotion_dict, show_vocab=True)
+    tmoom_emotions, tmoom_coverage, tmoom_words = profile_emotions(meat, nrc_emotion_dict, show_vocab=True)
 
     emotion_names = sorted(mb_emotions.keys())
 
     pl.DataFrame({
-      'emotion': emotion_names + ['coverage'],
-      'Marine Biologist': [mb_emotions[emotion] for emotion in emotion_names] + [mb_coverage],
-      'Mood Ring': [mr_emotions[emotion] for emotion in emotion_names] + [mr_coverage],
-    })
+      'emotion': emotion_names + ['coverage'] + ['words'],
+      'Marine Biologist': [mb_emotions[emotion] for emotion in emotion_names] + [mb_coverage] + [mb_words],
+      'Mood Ring': [mr_emotions[emotion] for emotion in emotion_names] + [mr_coverage] + [mr_words],
+        'Tmoom': [tmoom_emotions[emotion] for emotion in emotion_names] + [tmoom_coverage] + [tmoom_words],
+    }, strict=False)
     return
 
 
