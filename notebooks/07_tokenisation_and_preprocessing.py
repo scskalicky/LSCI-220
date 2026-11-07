@@ -319,22 +319,22 @@ def _(mo):
 
     ## Method 3: tokenize first, then remove punctuation tokens
 
-    Because `nltk.word_tokenize()` puts punctuation into its own tokens, we can remove punctuation *after* tokenizing by dropping those tokens. The string method `.isalnum()` returns `True` only if **every** character in a string is a letter or a number:
+    Because `nltk.word_tokenize()` puts punctuation into its own tokens, we can remove punctuation *after* tokenizing by dropping those tokens. The string method `.isalpha()` returns `True` only if **every** character in a string is a letter:
     """)
     return
 
 
 @app.cell
 def _():
-    # False because the ! is not a letter or number
-    'hi!'.isalnum()
+    # False because the ! is not a letter
+    'hi!'.isalpha()
     return
 
 
 @app.cell
 def _():
-    # True because 'h' and 'i' are letters and '1' is a number
-    'hi1'.isalnum()
+    # also False, because '1' is a number, not a letter (so .isalpha() removes numbers too!)
+    'hi1'.isalpha()
     return
 
 
@@ -349,15 +349,15 @@ def _(nltk):
 
 @app.cell
 def _(jp, nltk):
-    # only keep tokens that are letters or numbers
-    [token for token in nltk.word_tokenize(jp) if token.isalnum()]
+    # only keep tokens that are made of letters
+    [token for token in nltk.word_tokenize(jp) if token.isalpha()]
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    > **Think about it:** what would happen to the `n't` in "I can't even." if you used `.isalnum()` on its tokens? Try it in the cell below.
+    > **Think about it:** what would happen to the `n't` in "I can't even." if you used `.isalpha()` on its tokens? Try it in the cell below.
     """)
     return
 
@@ -711,7 +711,7 @@ def _(english_stopwords, mb_raw, nltk, word_tokenizer):
     tokens_lower = [token.lower() for token in tokens_nltk]
 
     # pipeline 4: lowercased nltk tokens, without punctuation
-    tokens_no_punct = [token for token in tokens_lower if token.isalnum()]
+    tokens_no_punct = [token for token in tokens_lower if token.isalpha()]
 
     # pipeline 5: lowercased nltk tokens, without punctuation or stopwords
     tokens_no_stop = [token for token in tokens_no_punct if token not in english_stopwords]

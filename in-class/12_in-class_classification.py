@@ -31,7 +31,7 @@ def _(mo):
     Today's plan:
 
     1. Review: baselines, training and test sets, and z-scores
-    2. Activities: build your own satire detector, words vs lexicon features, and fool the classifiers
+    2. Activities: build your own satire detector, and fool the classifier
     3. Critical reflection
     """)
     return
@@ -47,17 +47,13 @@ def _():
     import polars as pl
     import nltk
     from glob import glob
-    from nltk import FreqDist
     from nltk.sentiment.vader import SentimentIntensityAnalyzer
-    from sklearn.feature_extraction.text import CountVectorizer
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import confusion_matrix
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler
     nltk.download(['punkt_tab', 'vader_lexicon'])
     return (
-        CountVectorizer,
-        FreqDist,
         LogisticRegression,
         SentimentIntensityAnalyzer,
         StandardScaler,
@@ -211,7 +207,7 @@ def _(
       # avoid dividing by zero
       if len(ratings) == 0:
         return 0
-      return sum(ratings) / len(ratings)
+      return round(sum(ratings) / len(ratings),3)
 
     def review_features(text, stars):
       tokens = [token for token in nltk.word_tokenize(text.lower()) if token.isalpha()]
@@ -223,15 +219,15 @@ def _(
         sentences = ['']
 
       return {
-        'VADER (sentence average)': sum([vader.polarity_scores(sentence)['compound'] for sentence in sentences]) / len(sentences),
+        'VADER (sentence average)': round(sum([vader.polarity_scores(sentence)['compound'] for sentence in sentences]) / len(sentences), 3),
         'AFINN average': average_rating(tokens, afinn_dict),
         'age of acquisition': average_rating(tokens, aoa_dict),
         'concreteness': average_rating(tokens, concrete_dict),
         'frequency': average_rating(tokens, freq_dict),
         'review length': len(tokens),
-        'average sentence length': len(tokens) / len(sentences),
-        'exclamation marks': text.count('!') / len(tokens),
-        'I / me / my': len([token for token in tokens if token in ['i', 'me', 'my', 'mine', 'myself']]) / len(tokens),
+        'average sentence length': round(len(tokens) / len(sentences),3),
+        'exclamation marks': round(text.count('!') / len(tokens),3),
+        'I / me / my': round(len([token for token in tokens if token in ['i', 'me', 'my', 'mine', 'myself']]) / len(tokens),3),
         'star rating': stars,
       }
 
@@ -245,7 +241,7 @@ def _(
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    We use the same training and test split for everything today, so that the classifiers are compared fairly. Instead of splitting the texts themselves, I split the *positions* of the reviews (0, 1, 2, ...), and use those positions to pick out the texts, features, and labels.
+    We use the same training and test split for everything today, so that the classifiers are compared fairly. Instead of splitting the texts themselves, I split the positions of the reviews (0, 1, 2, ...), and use those positions to pick out the texts, features, and labels.
     """)
     return
 
@@ -256,6 +252,8 @@ def _(review_labels, review_texts, train_test_split):
 
     y_train = [review_labels[position] for position in train_positions]
     y_test = [review_labels[position] for position in test_positions]
+
+    print(f'all the train positions are: {train_positions}\n')
 
     print(len(train_positions), 'training reviews')
     print(len(test_positions), 'test reviews')
@@ -352,139 +350,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # **Activity: words vs lexicon features**
+    # **Activity: fool the classifier**
 
-    In the classification notebook, words as features did better than hand-made features. Let's see if that is true for satire too. Below, `CountVectorizer()` turns each review into word counts (ignoring words which only appear in one review), and we train a logistic regression on those counts.
-    """)
-    return
+    Write your own review below, and give it a star rating. The classifier will guess whether it is satire or normal, using the features you chose in the first activity.
 
-
-@app.cell
-def _(
-    CountVectorizer,
-    LogisticRegression,
-    review_texts,
-    test_positions,
-    train_positions,
-    y_test,
-    y_train,
-):
-    train_texts = [review_texts[position] for position in train_positions]
-    test_texts = [review_texts[position] for position in test_positions]
-
-    word_vectorizer = CountVectorizer(min_df = 2)
-    word_X_train = word_vectorizer.fit_transform(train_texts)
-    word_X_test = word_vectorizer.transform(test_texts)
-
-    word_classifier = LogisticRegression(max_iter = 2000)
-    word_classifier.fit(word_X_train, y_train)
-
-    print('training accuracy:', round(word_classifier.score(word_X_train, y_train), 3))
-    print('test accuracy:', round(word_classifier.score(word_X_test, y_test), 3))
-    return test_texts, train_texts, word_classifier, word_vectorizer
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    Much better than the lexicon features! But notice the training accuracy. What does it tell us?
-
-    Let's look at which words the classifier relies on most. A positive weight means the word points towards `satire`, and a negative weight towards `normal`:
-    """)
-    return
-
-
-@app.cell
-def _(FreqDist, pl, word_classifier, word_vectorizer):
-    word_weights = FreqDist(dict(zip(word_vectorizer.get_feature_names_out(), word_classifier.coef_[0])))
-
-    top_satire_words = [word for (word, weight) in word_weights.most_common(15)]
-    top_normal_words = [word for (word, weight) in word_weights.most_common()[-15:]]
-
-    pl.DataFrame({'satire words': top_satire_words, 'normal words': top_normal_words})
-    return (word_weights,)
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    Are these words about *satire*, or about something else? Many of the satirical reviews were written about a handful of products which became famous for their joke reviews on Amazon. Look up a few of the satire words in the reviews to find out (you can use the review reader in the sentiment in-class notebook, or search the text files).
-
-    What happens if we take away the top 20 satire words? Tick the box to train the classifier again without them.
-    """)
-    return
-
-
-@app.cell
-def _(mo):
-    remove_words = mo.ui.checkbox(label = 'remove the top 20 satire words')
-    remove_words
-    return (remove_words,)
-
-
-@app.cell
-def _(
-    CountVectorizer,
-    LogisticRegression,
-    mo,
-    remove_words,
-    test_texts,
-    train_texts,
-    word_weights,
-    y_test,
-    y_train,
-):
-    removed = [word for (word, weight) in word_weights.most_common(20)]
-
-    if remove_words.value:
-      reduced_vectorizer = CountVectorizer(min_df = 2, stop_words = removed)
-    else:
-      reduced_vectorizer = CountVectorizer(min_df = 2)
-
-    reduced_X_train = reduced_vectorizer.fit_transform(train_texts)
-    reduced_X_test = reduced_vectorizer.transform(test_texts)
-
-    reduced_classifier = LogisticRegression(max_iter = 2000)
-    reduced_classifier.fit(reduced_X_train, y_train)
-
-    mo.vstack([
-      mo.md(f'**removed words:** {", ".join(removed) if remove_words.value else "none"}'),
-      mo.md(f'**test accuracy:** {round(reduced_classifier.score(reduced_X_test, y_test) * 100, 1)}%'),
-    ])
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    Some things to think about:
-
-    - Why does the word classifier get 100% on its training data?
-    - Which of the top satire words are about satire *itself* (e.g., the way people write satire), and which are just about the *products*?
-    - What happened to the accuracy when you removed the top words? What does that tell you about how much the classifier depends on them?
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.accordion({"Discussion notes": mo.md(r'''
-    - with thousands of words as features and only 600 training reviews, the classifier can find some combination of words that perfectly separates the training reviews; this is overfitting, which is why we only trust the test accuracy
-    - many of the top satire words are products or topics which attracted lots of joke reviews (e.g., *unicorn* meat, *Tuscan* whole milk, *binders* full of *women*, *banana* slicers), not features of satirical writing in general; a few are function words like *my*, *his*, *your*, and *been*, which may reflect the storytelling style of the satire
-    - removing the top 20 words makes very little difference (here, the accuracy actually goes up slightly, to about 91%!), because the classifier has many other topic words to rely on; this is a sign it has learned *what people write satire about*, rather than *how* they write it
-    - the lexicon features are less accurate, but they describe the *style* of the reviews, so they might work better on satirical reviews of new products
-    ''')})
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    # **Activity: fool the classifiers**
-
-    Write your own review below, and give it a star rating. Both classifiers will guess whether it is satire or normal. (The lexicon classifier uses the features you chose in the first activity.)
-
-    Can you write a satirical review that both classifiers think is normal? Can you write a real review that they think is satire?
+    Can you write a satirical review that the classifier thinks is normal? Can you write a real review that it thinks is satire? Try changing the features in the first activity, and see if the guess changes.
     """)
     return
 
@@ -502,25 +372,17 @@ def _(
     chosen_features,
     lexicon_classifier,
     lexicon_scaler,
+    mo,
     my_review,
     my_stars,
-    pl,
     review_features,
-    word_classifier,
-    word_vectorizer,
 ):
     # the lexicon classifier: describe the review with the chosen features
     my_features = review_features(my_review.value, my_stars.value)
     my_lexicon_row = [[my_features[feature] for feature in chosen_features.value]]
     my_lexicon_guess = lexicon_classifier.predict(lexicon_scaler.transform(my_lexicon_row))[0]
 
-    # the word classifier: count the words
-    my_word_guess = word_classifier.predict(word_vectorizer.transform([my_review.value]))[0]
-
-    pl.DataFrame({
-      'classifier': ['lexicon features', 'words'],
-      'guess': [my_lexicon_guess, my_word_guess],
-    })
+    mo.md(f'### the classifier thinks this review is: {my_lexicon_guess}')
     return
 
 
@@ -529,8 +391,8 @@ def _(mo):
     mo.callout(mo.md(r'''
     # **Critical reflection**
 
-    1. Our best classifier is about 88% accurate, but it mostly relies on the names of products and topics. Has it learned what satire *is*?
-    2. What do you think would happen if we used these classifiers on satirical reviews of new products, or on satire from somewhere else (e.g., news satire)?
+    1. Our classifier does better than the baseline. Has it learned what satire *is*?
+    2. What do you think would happen if we used this classifier on satirical reviews of new products, or on satire from somewhere else (e.g., news satire)?
     3. As a human reader, how do *you* recognise satire? Which of those clues could our features capture, and which could they not?
     4. Satire and humour can be hard for people to recognise too. What does it mean for a classifier to be "right" when people might disagree about whether something is satirical?
     '''), kind = 'info')
@@ -540,8 +402,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.accordion({"Critical reflection notes": mo.md(r'''
-    - a classifier learns whatever patterns separate the labels in its training data; if the satire is mostly about certain products, the easiest pattern is the products, not the satire
-    - on new products or other kinds of satire, the topic words would be useless, so the word classifier would probably do much worse; the style-based lexicon features might transfer a little better, but would also struggle
+    - a classifier learns whatever patterns separate the labels in its training data, whether or not they are the patterns we care about; our features capture some traces of satire (e.g., less positive sentiment, more storytelling with *I*), but they don't capture what makes something satirical
+    - on new products or other kinds of satire (e.g., news satire, which is not written in the first person), the patterns could be quite different, so the classifier would probably do worse
     - people use exaggeration, absurdity, mismatches between tone and content, knowledge of the world, and knowledge of the genre; word counts and lexicon averages only capture traces of these (e.g., less positive sentiment, more storytelling with *I*)
     - the labels in our data came from people, and recognising satire depends on knowledge, culture, and context; a classifier can only be as "right" as the labels it was trained on, and accuracy hides the cases where the labels themselves are debatable
     ''')})

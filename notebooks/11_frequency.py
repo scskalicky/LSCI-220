@@ -536,6 +536,8 @@ def _(mo):
     mo.md(r"""
     Now let's plot the 50 most frequent words, from most to least frequent. We'll use the `matplotlib` library to make the plot. First, we pull the words and their counts out of `.most_common()` into two lists.
 
+    Each item that `.most_common()` gives back is a pair of values in round brackets, like `('the', 72)`. This is called a **tuple**, which is a data container like a list, except that it can't be changed once it's made. In the list comprehension below, `for (word, count) in ...` takes each tuple apart, so that the first value is saved as `word` and the second value is saved as `count`. Then we can keep just the words, or just the counts.
+
     Then we create the plot using a series of commands to first set the plot data, labels, and other aesthetics. Don't worry too much about this if the plot code is confusing.
     """)
     return
@@ -829,6 +831,8 @@ def _(mo):
 def _(mo):
     mo.md(r"""
     ## **Normalising frequency counts**
+
+    (Note that *normalising* means something different here than in the tokenisation and preprocessing notebook. There, we normalised the *text*, by lowercasing it and removing punctuation, so that different versions of the same word are counted together. Here, we normalise the *counts*, so that we can compare texts and corpora of different sizes.)
 
     Most corpora have a different total number of words. Let's invent an extreme example and pretend that Corpus A has 1000 words and Corpus B has 100 words. How could we interpret the following counts?
 

@@ -261,6 +261,8 @@ def _(mo):
     Now we need to know how many documents each word appears in. This is called **document frequency**. Note that we don't care how many times the word appears in each episode, only *whether* it appears in an episode at all.
 
     A nice way to do this is to loop through each episode, turn its tokens into a `set()` (which removes duplicates, so each word only appears once), and then count each word in the set. I use a `FreqDist` to do the counting, since it works like a dictionary that starts every word at zero.
+
+    In the loop, `document_frequency[word] += 1` adds 1 to the count for that word. `x += 1` is just a shorter way of writing `x = x + 1`.
     """)
     return
 
@@ -603,6 +605,7 @@ def _(FreqDist):
 @app.cell
 def _(episode_names, seinfeld_tfidf, seinfeld_words, top_sklearn):
     # which row is the junior mint?
+    # (.index() gives the position of an item in a list)
     junior_mint_row = episode_names.index('the junior mint')
 
     top_sklearn(seinfeld_tfidf, seinfeld_words, junior_mint_row)

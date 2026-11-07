@@ -380,6 +380,7 @@ def _():
     # hold this file open as the variable `withtext_file`
     with open('withtext.txt', 'w+') as withtext_file:
       # initiate a loop (what is enumerate doing? How is it used in the .write() line?)
+      # (enumerate() gives a number to each item in the loop: you'll learn about it in more depth in the enumerate and zip notebook)
       for index, word in enumerate('every day is exactly the same'.split()):
         # write to the same file
         withtext_file.write(word + '_' +  str(index) + '\n')
