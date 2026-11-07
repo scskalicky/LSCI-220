@@ -43,6 +43,13 @@ def _():
     import polars as pl
     import nltk
     from nltk.corpus import cmudict
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['punkt_tab', 'cmudict'])
     return cmudict, nltk, pl, requests
 

@@ -52,6 +52,12 @@ def _():
     from sklearn.metrics import confusion_matrix
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['punkt_tab', 'vader_lexicon'])
     return (
         LogisticRegression,

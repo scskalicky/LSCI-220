@@ -54,6 +54,13 @@ def _(mo):
 def _():
     # load in wordnet as wn
     import nltk
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['wordnet', 'omw-1.4'])
     from nltk.corpus import wordnet as wn
 

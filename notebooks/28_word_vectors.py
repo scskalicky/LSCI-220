@@ -55,6 +55,13 @@ def _():
     import gensim.downloader
     from sklearn.decomposition import PCA
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the NLTK resources for this notebook
     nltk.download(['punkt_tab', 'state_union', 'wordnet'])
     return FastText, PCA, Word2Vec, gensim, nltk, pl, plt, state_union, wn

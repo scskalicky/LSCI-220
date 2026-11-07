@@ -50,6 +50,13 @@ def _():
     from nltk import FreqDist
     from nltk.corpus import state_union
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the NLTK resources for this notebook
     nltk.download(['punkt_tab', 'state_union'])
     return FreqDist, nltk, requests, state_union

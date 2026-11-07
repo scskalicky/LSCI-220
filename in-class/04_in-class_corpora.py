@@ -43,6 +43,12 @@ def _():
     import matplotlib.pyplot as plt
     import polars as pl
     import nltk
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['state_union', 'punkt_tab'])
     from nltk.corpus import state_union
     from nltk.corpus import PlaintextCorpusReader

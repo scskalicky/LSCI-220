@@ -44,6 +44,13 @@ def _():
     import requests
     import polars as pl
     import nltk
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['punkt_tab', 'stopwords'])
     from nltk.corpus import stopwords
     from nltk.tokenize import RegexpTokenizer

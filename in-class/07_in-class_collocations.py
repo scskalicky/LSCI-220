@@ -48,6 +48,13 @@ def _():
     from nltk.collocations import BigramCollocationFinder
     from nltk.metrics import BigramAssocMeasures
     from nltk.tokenize import MWETokenizer
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['punkt_tab', 'webtext', 'gutenberg', 'brown'])
     return (
         BigramAssocMeasures,

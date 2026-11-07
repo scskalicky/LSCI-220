@@ -67,6 +67,13 @@ def _():
     import nltk
     from nltk import FreqDist
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # import resources for tokenizing and tagging
     nltk.download(['punkt_tab', 'averaged_perceptron_tagger_eng', 'tagsets_json', 'treebank', 'universal_tagset', 'state_union'])
     return FreqDist, nltk, pl, re, requests

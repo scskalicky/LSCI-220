@@ -68,6 +68,12 @@ def _():
     from nltk.corpus.reader.plaintext import CategorizedPlaintextCorpusReader
     from nltk.text import Text
 
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download NLTK resources for this notebook (takes a bit)
     nltk.download(['gutenberg', 'punkt_tab', 'brown', 'state_union'])
 

@@ -63,6 +63,12 @@ def _():
     from nltk.corpus import gutenberg
     from sklearn.feature_extraction.text import TfidfVectorizer
 
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the NLTK resources for this notebook
     nltk.download(['punkt_tab', 'gutenberg'])
     return (

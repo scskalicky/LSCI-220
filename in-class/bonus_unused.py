@@ -39,6 +39,13 @@ def _():
     # libraries and data these sections need
     import nltk
     from nltk import FreqDist
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['stopwords', 'genesis', 'state_union'])
     from nltk.corpus import stopwords
     from nltk.corpus import state_union

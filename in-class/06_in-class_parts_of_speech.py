@@ -44,6 +44,13 @@ def _():
     import polars as pl
     import nltk
     from nltk import FreqDist
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['punkt_tab', 'averaged_perceptron_tagger_eng', 'tagsets_json', 'universal_tagset', 'genesis', 'brown'])
     return FreqDist, nltk, pl, plt, requests
 

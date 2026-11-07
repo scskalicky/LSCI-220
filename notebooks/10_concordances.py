@@ -52,6 +52,13 @@ def _():
     import nltk
     from nltk.text import Text
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the corpora this notebook uses
     nltk.download(['webtext', 'nps_chat', 'gutenberg'])
     return Text, nltk

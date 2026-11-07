@@ -52,6 +52,13 @@ def _():
     import nltk
     from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the NLTK resources for this notebook
     nltk.download(['punkt_tab', 'vader_lexicon'])
     return SentimentIntensityAnalyzer, io, nltk, pl, requests, zipfile

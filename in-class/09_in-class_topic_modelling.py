@@ -47,6 +47,13 @@ def _():
     from nltk.corpus import brown
     from sklearn.feature_extraction.text import CountVectorizer
     from sklearn.decomposition import LatentDirichletAllocation
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download(['brown'])
     return CountVectorizer, FreqDist, LatentDirichletAllocation, brown, pl, plt
 

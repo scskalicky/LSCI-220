@@ -650,6 +650,13 @@ def _(mo):
 def _():
     # load in required nltk resources.
     import nltk
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     nltk.download('punkt_tab')
     return (nltk,)
 

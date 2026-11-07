@@ -41,6 +41,13 @@ def _():
     import polars as pl
     import nltk
 
+    import os
+    import warnings
+
+    # on molab, hide NLTK's (harmless) warning about the download folder
+    if os.path.expanduser('~') == '/home/marimo':
+      warnings.filterwarnings('ignore', message = 'NLTK will not authorize')
+
     # download the NLTK resources for this notebook
     nltk.download(['punkt_tab'])
     return nltk, pl, requests
