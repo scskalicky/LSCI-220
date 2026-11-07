@@ -203,3 +203,6 @@ textAnalytics.csv
 
 # folder written by the in-class corpora notebook
 mini_corpus/
+
+# course guide (shared with students separately)
+marimo-guide.md
