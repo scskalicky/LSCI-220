@@ -1,5 +1,8 @@
 # LSCI 220: Introduction to Computational Linguistics and NLP
 
+[![Setup check](https://github.com/scskalicky/LSCI-220/actions/workflows/setup-check.yml/badge.svg)](https://github.com/scskalicky/LSCI-220/actions/workflows/setup-check.yml)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
 Course materials for LSCI 220 at Te Herenga Waka—Victoria University of Wellington. The course introduces computational approaches to analysing language, using the Python programming language. No programming experience is assumed.
 
 All of the course materials are [marimo](https://marimo.io) notebooks.
