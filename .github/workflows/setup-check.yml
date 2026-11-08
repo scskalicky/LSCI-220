@@ -1,0 +1,36 @@
+name: Setup check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - pyproject.toml
+      - uv.lock
+      - 00_check_setup.py
+      - .github/workflows/setup-check.yml
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv (Windows, same command as the guide)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+          echo "$env:USERPROFILE\.local\bin" >> $env:GITHUB_PATH
+
+      - name: Install uv (Mac, same command as the guide)
+        if: runner.os == 'macOS'
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run the setup check notebook
+        run: uv run python 00_check_setup.py
