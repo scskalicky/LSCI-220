@@ -191,7 +191,6 @@ def _(mo):
 @app.cell
 def _():
     # use this code cell to create your variable and print it!
-
     return
 
 
@@ -294,7 +293,7 @@ def _(mo):
 
 @app.cell
 def _():
-    # Print a lower case version of the string using .lower()
+    # Print a lower case version of the string using .lower() 
     print('KIWI'.lower())
     return
 
@@ -432,7 +431,6 @@ def _(mo):
 @app.cell
 def _():
     # use this code cell to test things out!
-
     return
 
 
