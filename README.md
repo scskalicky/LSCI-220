@@ -54,6 +54,10 @@ The notebooks use the following resources. Each remains under its own terms, and
 - **Corpora and WordNet:** NLTK (Bird, Klein & Loper, 2009) and WordNet (Princeton University)
 - **Texts:** *Seinfeld* scripts; *They're Made Out of Meat* (Terry Bisson); "Mood Ring" (Lorde)
 
+## Acknowledgements
+
+Some of the course content was written with the help of *Natural Language Processing with Python* (the NLTK book) by Steven Bird, Ewan Klein and Edward Loper, available at [nltk.org/book](https://www.nltk.org/book/).
+
 ## License
 
-Course materials by Stephen Skalicky. This course content is offered under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/) license. Content in this course can be considered under this license unless otherwise noted. The data and resources listed above remain under their original terms.
+Course materials by Stephen Skalicky. This course content is offered under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/) license. Content in this course can be considered under this license unless otherwise noted. The data and resources listed above remain under their original terms. The full license text is in the `LICENSE` file.
