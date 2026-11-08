@@ -48,7 +48,7 @@ Keep the notebooks you make yourself in their own folder, so that you don't over
 
 ## Data and resources
 
-The notebooks use the following resources. Each remains under its own terms, and is included here for educational use.
+The notebooks use the following resources.
 
 - **Word frequency:** SUBTLEX-US (Brysbaert & New, 2009)
 - **Age of acquisition:** Kuperman, Stadthagen-Gonzalez & Brysbaert (2012)
