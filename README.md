@@ -6,6 +6,7 @@
 ![marimo](https://img.shields.io/badge/notebooks-marimo-1C7ED6)
 ![uv](https://img.shields.io/badge/installed%20with-uv-DE5FE9)
 ![NLTK](https://img.shields.io/badge/NLP-NLTK-green)
+![Developed with Claude](https://img.shields.io/badge/developed%20with-Claude-D97757?logo=claude&logoColor=white)
 
 Course materials for LSCI 220 at Te Herenga Waka—Victoria University of Wellington. The course introduces computational approaches to analysing language, using the Python programming language. No programming experience is assumed.
 
@@ -64,6 +65,8 @@ The notebooks use the following resources. Each remains under its own terms, and
 ## Acknowledgements
 
 Some of the course content was written with the help of *Natural Language Processing with Python* (the NLTK book) by Steven Bird, Ewan Klein and Edward Loper, available at [nltk.org/book](https://www.nltk.org/book/).
+
+The 2026 version of these materials was developed with the help of Claude (Anthropic), which was used to convert notebooks to marimo, draft and revise explanations and code, and check the materials for errors. All content was reviewed and edited by me.
 
 ## License
 
