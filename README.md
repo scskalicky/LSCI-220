@@ -64,7 +64,7 @@ The notebooks use the following resources.
 
 ## Acknowledgements
 
-Some of the course content was written with the help of *Natural Language Processing with Python* (the NLTK book) by Steven Bird, Ewan Klein and Edward Loper, available at [nltk.org/book](https://www.nltk.org/book/).
+Some of the course content is based on content from *Natural Language Processing with Python* (the NLTK book) by Steven Bird, Ewan Klein and Edward Loper, available at [nltk.org/book](https://www.nltk.org/book/). LSCI 220 still uses the NLTK Python library.
 
 The 2026 version of these materials was developed with the help of Claude (Anthropic), which was used to convert previous Google Colab notebooks to marimo, revise explanations and code, and check the materials for errors. All content was reviewed and edited by me. I take sole responsibility for any remaining errors. 
 
