@@ -6,7 +6,6 @@
 ![marimo](https://img.shields.io/badge/notebooks-marimo-1C7ED6)
 ![uv](https://img.shields.io/badge/installed%20with-uv-DE5FE9)
 ![NLTK](https://img.shields.io/badge/NLP-NLTK-green)
-[![Open in molab](https://img.shields.io/badge/open%20in-molab-1C7ED6)](https://molab.marimo.io/github/scskalicky/LSCI-220/blob/main/notebooks/01_variables_and_strings.py)
 
 Course materials for LSCI 220 at Te Herenga Waka—Victoria University of Wellington. The course introduces computational approaches to analysing language, using the Python programming language. No programming experience is assumed.
 
