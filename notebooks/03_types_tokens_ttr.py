@@ -446,7 +446,7 @@ def _(mo):
 
     To account for this problem, there are a surprisingly large number of different TTR metrics that have been developed. Many of them try to include some sort of average TTR by moving over and calculating TTR for portions of the text, or using some other sort of function which helps address the effects of text length. Some other research also points out that human intuitions or perceptions of lexical diversity are not being captured in measures such as TTR.
 
-    So, know that other measures exist, such as MSTTR (mean segmental TTR), MATTR (moving-average TTR) and MTLD (measure of textual lexical diversity). Chapter 1 of *Defining and measuring lexical diversity* (in the readings) explains several of them. To wrap this notebook up, let's try to "prove" how text length might influence TTR while also getting some practice with function writing :)
+    So, know that other measures exist, such as MSTTR (mean segmental TTR), MATTR (moving-average TTR) and MTLD (measure of textual lexical diversity). To wrap this notebook up, let's try to "prove" how text length might influence TTR while also getting some practice with function writing :)
 
     We are going to write a function which splits a text into segments and then calculates the TTR for each segment, and then averages those TTR values to get an average TTR.
 
