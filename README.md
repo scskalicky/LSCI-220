@@ -43,7 +43,7 @@ https://molab.marimo.io/github/scskalicky/LSCI-220/blob/main/notebooks/01_variab
 | `images/` | Figures used in the notebooks |
 | `pyproject.toml`, `uv.lock` | The list of Python packages the course uses (uv reads these for you) |
 | `.github/` | An automatic test of the setup - you can ignore it |
-|custom.css| A css file to make the markdown font larger. Customise it, or disable by commenting out the css line in pyproject|
+|`custom.css`| A css file to make the markdown font larger. Customise it, or disable by commenting out the css line in pyproject|
 
 Keep the notebooks you make yourself in their own folder, so that you don't overwrite them if you download the course materials again.
 
