@@ -1,0 +1,4 @@
+/* Increase default markdown paragraph and list text size */
+.paragraph, .markdown li {
+  font-size: 1.5rem;
+}

@@ -19,3 +19,6 @@ package = false
 
 [tool.marimo.runtime]
 auto_instantiate = false
+
+[tool.marimo.display]
+custom_css = ["custom.css"]
