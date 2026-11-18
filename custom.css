@@ -2,3 +2,19 @@
 .paragraph, .markdown li {
   font-size: 1.25rem;
 }
+
+
+/* cell output, e.g. strings, lists and numbers a cell displays */
+.output-area pre {
+  font-size: 1.15rem;
+}
+
+/* printed output from print() */
+.console-output-area pre {
+  font-size: 1.15rem;
+}
+
+/* all cell outputs except markdown: lists, dictionaries, numbers, text */
+.output-area:not(:has(.markdown)) * {
+  font-size: 1.15rem;
+}
